@@ -61,6 +61,26 @@ INSERT INTO film VALUES (
       null, 134, null, null, 'PG-13', 'Not Released'
 );
 
+INSERT INTO film VALUES (
+	  'DDLJ', '1995-10-20', 'SRK and Kajol getting married',
+      5, 160, 35, 5, 'PG-13', 'Available'
+);
+
+INSERT INTO film VALUES (
+	  'Kal Ho na Ho', '2003-11-28', 'SRK dies due to heart issues',
+      7, 150, 30, 4.8, 'PG-13', 'Available'
+);
+
+INSERT INTO film VALUES (
+	  'Joker', '2019-10-02', 'Epic Movie on the best super villan ever',
+      12, 120, 65, 5, 'PG-18', 'Available'
+);
+
+INSERT INTO film VALUES (
+	  'RRR', '2022-03-24', 'Epic battle between two major characters',
+      870, 120, 45, 4.9, 'PG-13', 'Available'
+);
+
 -- let us imagine, that this table has a auto generating filmId column at the beginning
 -- INSERT INTO film VALUES (
 -- 		default, 'Jawan', '2023-09-07', 'SRK is Jawan',
@@ -140,3 +160,57 @@ AND rental_rate IS NOT NULL;
 
 SELECT * FROM film WHERE length > 120 
 OR rental_rate IS NOT NULL;
+
+-- find all the films which have rental_rate of 10, 5 or 7 
+SELECT * FROM film WHERE rental_rate = 10 OR rental_rate = 5 OR rental_rate = 7 OR 
+rental_rate = 8;
+
+SELECT * FROM film WHERE rental_rate IN (10,5,7,8);
+
+-- find all the film whose length is between 100 - 120 
+SELECT * FROM film WHERE length >= 100 AND length <= 120;
+
+-- query through a range of values -> BETWEEN 
+-- BETWEEN is an inclusive operator, so BETWEEN x AND y means,  >= x AND <= y
+SELECT * FROM film WHERE length BETWEEN 100 AND 120;
+
+-- query all the movies but by ratings, highest rating first 
+SELECT * FROM film ORDER BY ratings DESC;
+
+-- query all the movies but by rental, cheapest first
+-- ORDER BY is by default ascending
+SELECT * FROM film ORDER BY rental_rate; 
+
+SELECT * FROM film ORDER BY title;
+
+-- LIMIT -> limits the number of output rows
+
+-- find the first movie with highest rating
+SELECT * FROM film ORDER BY ratings DESC LIMIT 1;
+
+-- find the first 3 movies with highest rating
+SELECT * FROM film ORDER BY ratings DESC LIMIT 3;
+
+-- query find the movies with best rating but cheapest rental rates 
+-- order the data by best ratings, and then by cheapest rental rate
+SELECT * FROM film ORDER BY ratings DESC, rental_rate;
+
+
+-- UPDATING values 
+UPDATE film SET rental_rate = 11 WHERE title = 'Oppenhiemer';
+
+UPDATE film SET replacement_cost = 100, ratings = 5 WHERE title = 'Oppenhiemer';
+
+-- UPDATE tableName SET col1 = val1, col2 = val2.... WHERE rowFilterCondition
+
+-- DELETING values 
+DELETE FROM film WHERE title='RRR';
+
+-- task 1 -> 
+-- a. try updating without any where clause
+-- b. try update with where clause using IN and BETWEEN operators 
+
+-- task 2 -> 
+-- a. figure out how to delete all the data in a table 
+-- b. figure out the difference between truncate and drop for a table. 
+
